@@ -10,15 +10,8 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
   </head>
   <body>
-
 <h1 class="text-center">ROI CALCULATOR</h1>
 
 <div class="container">
@@ -34,8 +27,9 @@
     <legend class="hidden">ROI Calc</legend>
 
     <!-- Text input-->
+    <h2 class="" for="num-of-emp">Number of Employees</h2>
     <div class="form-group">
-      <h2 class="col-md-4 control-label" for="num-of-emp">Number of Employees</h2>
+
       <hr/>
       <div class="col-md-4">
       <input v-on:change="reCalc" id="num_of_emp" name="num_of_emp" type="number" placeholder="100" class="form-control input-md"  v-model="numOfEmployes">
@@ -157,8 +151,6 @@
 
   </fieldset>
   </form>
-
-
 </div>
 
 

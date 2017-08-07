@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+<h1 class="text-center">ROI CALCULATOR</h1>
+
+<div class="container">
+<div id="left" class="col-md-6">
+<p>This calculator simulates the potential return on investment that you could realize by managing NMLS training and internal communication with Coop software.</p>
+<p>Enter your current data and run the analysis to calculate your potential return.</p>
+</div>
+
+<div id="right" class="col-md-6">
+    <form class="form-horizontal" method="get" action="2.html">
+    <fieldset>
+    <!-- Form Name -->
+    <legend class="hidden">ROI Calc</legend>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <h2 class="col-md-4 control-label" for="num-of-emp">Number of Employees</h2>
+      <hr/>
+      <div class="col-md-4">
+      <input v-on:change="reCalc" id="num_of_emp" name="num_of_emp" type="number" placeholder="100" class="form-control input-md"  v-model="numOfEmployes">
+
+      </div>
+    </div>
+
+  <h2>Monthly Hard Costs</h2>
+  <hr/>
+  <br/>
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="training_provider">Monthly Compliance training provider </label>
+      <div class="col-md-4">
+      <input v-on:change="reCalc" id="training_provider" name="training_provider" type="number" placeholder="$500" class="form-control input-md"  v-model="training_provider" >
+
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="lms">Learning Management System</label>
+      <div class="col-md-4">
+      <input v-on:change="reCalc" id="lms" name="lms" type="number" placeholder="$1000" class="form-control input-md"  v-model="lms">
+
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="it_training_re">IT training resources</label>
+      <div class="col-md-4">
+      <input v-on:change="reCalc" id="it_training_re" name="it_training_re" type="number" placeholder="$0" class="form-control input-md"  v-model="it_training_re">
+
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="help_desk">IT help desk/ticket system</label>
+      <div class="col-md-4">
+      <input v-on:change="reCalc" id="help_desk" name="help_desk" type="number" placeholder="$0" class="form-control input-md"  v-model="help_desk">
+
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="scenario_desk">Current scenario desk solution</label>
+      <div class="col-md-4">
+      <input v-on:change="reCalc" id="scenario_desk" name="scenario_desk" type="number" placeholder="$0" class="form-control input-md" v-model="scenario_desk">
+
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="Intranet">Intranet expenses</label>
+      <div class="col-md-4">
+      <input v-on:change="reCalc" id="Intranet" name="Intranet" type="number" placeholder="$0" class="form-control input-md" v-model="Intranet">
+
+      </div>
+    </div>
+
+
+
+    <h2>Monthly Soft Costs</h2>
+    <hr/>
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="per_hour_labor">Average all-in labor cost per hour</label>
+      <div class="col-md-4">
+      <input v-on:change="reCalc" id="per_hour_labor" name="per_hour_labor" type="number" placeholder="$30" class="form-control input-md" v-model="per_hour_labor">
+
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="per_employee_per_month">Hours spent per employee per month looking for information</label>
+      <div class="col-md-4">
+      <input v-on:change="reCalc" id="per_employee_per_month" name="per_employee_per_month" type="number" placeholder=".5" class="form-control input-md" v-model="per_employee_per_month">
+
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="hours_spent_answering">Hours spent answering the same questions multiple times</label>
+      <div class="col-md-4">
+      <input v-on:change="reCalc" id="hours_spent_answering" name="hours_spent_answering" type="number" placeholder="1" class="form-control input-md" v-model="hours_spent_answering">
+
+      </div>
+    </div>
+
+
+  <hr/>
+
+  <!-- Text input-->
+  <div class="form-group hidden">
+    <label class="col-md-4 control-label" for="Coop_seat">Coop Price Per Employee</label>
+    <div class="col-md-4">
+    <input v-on:change="reCalc" id="Coop_seat" name="Coop_seat" type="number" placeholder="10" class="form-control input-md" v-model="Coop_seat">
+    <span class="help-block">help</span>
+    </div>
+  </div>
+
+  <!-- Text input-->
+  <div class="form-group">
+    <h2 class="col-md-4 control-label" for="Coop_seat">Business Name</h2>
+    <hr/>
+    <div class="col-md-4">
+    <input v-on:change="reCalc" id="business_name" name="business_name" type="text" placeholder="Acme Co" class="form-control input-md" v-model="Coop_seat">
+    </div>
+  </div>
+
+
+<button type="submit" class="btn btn-lg">Run Analysis</button>
+
+  </fieldset>
+  </form>
+
+
+</div>
+
+
+
+
+
+  </body>
+</html>

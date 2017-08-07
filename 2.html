@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>2</title>
+
+<!-- Bootstrap -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="app" class="container">
+<h1 class="text-center">The Business Case for the Coop for <span id="company_name">ACME Mortgage</span></h1>
+<div class="row">
+  <h2>Executive summary</h2>
+  <hr/>
+  <p> The Coop is an online software systems that puts the power of collective knowledge to work for your lenders.
+    Based the results of your data entered you would realize a hard costs savings <span id="savings">$1,800</span> per month </p>
+  <h3>Risk Mitigation</h3>
+  <hr/>
+  <p> How confident would you be if you were audited today that you could provide training records, etc.
+    There are three ways the Coop can benefit your company hard costs, soft costs, and risk mitigation. </p>
+</div>
+<div class="row">
+  <div class="col-xs-6">
+    <h5>Hard Costs</h5>
+    <hr/>
+    <p>Monthly Compliance training provider</p>
+    <input v-on:change="reCalc" id="training_provider" name="training_provider" type="number" placeholder="$500" class="form-control input-md"  v-model="training_provider" >
+    <br/>
+    <p>Learning Management System</p>
+    <input v-on:change="reCalc" id="lms" name="lms" type="number" placeholder="$1000" class="form-control input-md"  v-model="lms">
+    <br/>
+    <p>IT training resources</p>
+    <input v-on:change="reCalc" id="it_training_re" name="it_training_re" type="number" placeholder="$0" class="form-control input-md"  v-model="it_training_re">
+    <br/>
+    <p>IT help desk/ticket system</p>
+    <input v-on:change="reCalc" id="help_desk" name="help_desk" type="number" placeholder="$0" class="form-control input-md"  v-model="help_desk">
+    <br/>
+    <p>Current scenario desk solution</p>
+    <input v-on:change="reCalc" id="scenario_desk" name="scenario_desk" type="number" placeholder="$0" class="form-control input-md" v-model="scenario_desk">
+    <br/>
+    <p>Intranet expenses</p>
+    <input v-on:change="reCalc" id="Intranet" name="Intranet" type="number" placeholder="$0" class="form-control input-md" v-model="Intranet">
+    <br/>
+    <hr/>
+    <p>Total Hard Costs: ${{monthly_hard_costs}}</p>
+  </div>
+  <div class="col-xs-6">
+    <div class="embed-responsive embed-responsive-16by9">
+      <!--<iframe class="embed-responsive-item" width="560" height="315" src="https://www.youtube.com/embed/G-_TFm3zb_k" frameborder="0" allowfullscreen></iframe>-->
+    </div>
+  </div>
+</div>
+<hr/>
+<div class="row">
+  <div class="col-xs-6">
+    <h5>Monthly Soft Costs</h5>
+    <hr/>
+    <p>Average all-in labor cost per hour</p>
+    <input v-on:change="reCalc" id="per_hour_labor" name="per_hour_labor" type="number" placeholder="$30" class="form-control input-md" v-model="per_hour_labor">
+    <br/>
+    <p>Current scenario desk solution</p>
+    <input v-on:change="reCalc" id="per_employee_per_month" name="per_employee_per_month" type="number" placeholder=".5" class="form-control input-md" v-model="per_employee_per_month">
+    <br/>
+    <p>Intranet expenses</p>
+    <input v-on:change="reCalc" id="hours_spent_answering" name="hours_spent_answering" type="number" placeholder="1" class="form-control input-md" v-model="hours_spent_answering">
+    <br/>
+    <hr/>
+    <p>Total Hard Costs: ${{monthly_soft_costs}}</p>
+  </div>
+  <div class="col-xs-6">
+    <div class="embed-responsive embed-responsive-16by9">
+      <!--<iframe class="embed-responsive-item" width="560" height="315" src="https://www.youtube.com/embed/G-_TFm3zb_k" frameborder="0" allowfullscreen></iframe>-->
+    </div>
+  </div>
+</div>
+<hr/>
+<div class="row">
+  <div class="col-xs-6">
+    <h5>Risk Mitigation</h5>
+    <hr/>
+    <ul>
+      <li>Coop Coach customized content</li>
+      <li>Full reporting </li>
+      <li>Higher confidence for audits</li>
+      <li>Customized company specific policy videos</li>
+    </ul>
+  </div>
+  <div class="col-xs-6">
+    <div class="embed-responsive embed-responsive-16by9">
+      <!--<iframe class="embed-responsive-item" width="560" height="315" src="https://www.youtube.com/embed/G-_TFm3zb_k" frameborder="0" allowfullscreen></iframe>-->
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.1/vue.js"></script>
+
+<script>
+
+
+//Get URL PArams
+$.urlParam = function(name){
+	var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+	return results[1] || 0;
+}
+
+
+//Clean URL PArams
+$.Clean = function(name){
+	var results = name.replace("+", " ");
+	return results;
+}
+
+
+
+
+$(document).ready(function(){
+
+
+
+//Comapny Name
+var company_name = $.urlParam('business_name');
+var company_name_clean = $.Clean(company_name);
+$("#company_name").text(company_name_clean);
+
+
+
+
+ });
+
+</script>
+
+
+<script>
+new Vue({
+
+el: '#app',
+data : {
+  //Number of Employees
+  numOfEmployes: 0,
+  // //Hard Costs
+  training_provider:0,
+  lms:0,
+  it_training_re:0,
+
+  help_desk:0,
+  scenario_desk: 0,
+  Intranet:0,
+  // //Total Monthly Hard Costs
+  monthly_hard_costs:0,
+
+  // //Soft Costs
+  per_hour_labor:0,
+  per_employee_per_month:0,
+  hours_spent_answering:0,
+  // //Total Monthly Soft Costs
+  monthly_soft_costs:0,
+  // //Cost per Coop seat
+  Coop_seat:10,
+  // //Total Savings
+  monthly_total_savings:0,
+  // //Total Coop Cost
+  coop_cost:0,
+},
+
+methods: {
+  reCalc() {
+    this.monthly_hard_costs = this.training_provider+this.lms+this.it_training_re+this.help_desk+this.scenario_desk+this.Intranet;
+    this.monthly_soft_costs = (((this.hours_spent_answering+this.per_employee_per_month)*this.per_hour_labor)*this.numOfEmployes);
+    this.monthly_total_savings = this.monthly_hard_costs+this.monthly_soft_costs;
+    this.coop_cost = this.numOfEmployes * this.Coop_seat;
+  }
+
+},
+
+  mounted() {
+
+
+    this.numOfEmployes = parseInt($.urlParam('num_of_emp'));
+    //Hard COsts
+    this.training_provider = parseInt($.urlParam('training_provider'));
+    this.lms = parseInt($.urlParam('lms'));
+    this.it_training_re = parseInt($.urlParam('it_training_re'));
+    this.help_desk = parseInt($.urlParam('help_desk'));
+    this.scenario_desk = parseInt($.urlParam('scenario_desk'));
+    this.Intranet = parseInt($.urlParam('Intranet'));
+
+    //Soft Costs
+    // //Soft Costs
+    this.per_hour_labor = parseInt($.urlParam('per_hour_labor'));
+    this.per_employee_per_month = parseInt($.urlParam('per_employee_per_month'));
+    this.hours_spent_answering =parseInt($.urlParam('hours_spent_answering'));
+
+
+    this.monthly_hard_costs = this.training_provider+this.lms+this.it_training_re+this.help_desk+this.scenario_desk+this.Intranet;
+    this.monthly_soft_costs = (((this.hours_spent_answering+this.per_employee_per_month)*this.per_hour_labor)*this.numOfEmployes);
+    this.monthly_total_savings = this.monthly_hard_costs+this.monthly_soft_costs;
+    this.coop_cost = this.numOfEmployes * this.Coop_seat;
+
+
+  }
+
+});
+
+</script>
+
+
+
+</body>
+</html>
